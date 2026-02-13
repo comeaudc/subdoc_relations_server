@@ -1,6 +1,7 @@
 // Imports
 import express from "express";
 import dotenv from "dotenv";
+import { logReq, globalErr } from "./middleware/middlewares.js";
 // Setups
 dotenv.config();
 const PORT = process.env.PORT || 3001;
@@ -8,24 +9,12 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
-app.use((req, res, next) => {
-  console.log(
-    `${req.method} -- ${req.url} -- ${new Date().toLocaleTimeString()}`,
-  );
-
-  if (req.body) {
-    console.table(req.body);
-  }
-
-  next();
-});
+app.use(logReq);
 
 // Routes
 
 // Global Err
-app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ error: `❌ Error: ${err.message}` });
-});
+app.use(globalErr);
 
 // Listener
 app.listen(PORT, () => {

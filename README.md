@@ -1,9 +1,9 @@
 # Relating Collections and SubDocs
 
 ### Collections & Routes:
-- Products
-    - Create/Seed
-    - Get All
+- ✅ Products
+    - ✅ Create/Seed
+    - ✅ Get All
 - User
     - Create User & Cart
     - Read

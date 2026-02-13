@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { logReq, globalErr } from "./middleware/middlewares.js";
 import connectDB from "./db/conn.js";
+import productRoutes from "./routes/productRoutes.js";
 
 // Setups
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(logReq);
 connectDB();
 
 // Routes
+app.use("/api/product", productRoutes);
 
 // Global Err
 app.use(globalErr);

@@ -3,6 +3,14 @@ import Cart from "../models/cartSchema.js";
 
 const router = express.Router();
 
+router.get("/:userId", async (req, res) => {
+  const cart = await Cart.findOne({ user: req.params.userId }).populate("user", "-password").populate("items.product", "name price")
+
+  if (!cart) return res.status(404).json({ error: "cart not found" });
+
+  res.json(cart);
+});
+
 // Add/Inc/Dec items in cart
 router.post("/:userId", async (req, res) => {
   // Destructure variables for ease of use

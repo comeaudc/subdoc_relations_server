@@ -3,7 +3,7 @@ import Cart from "../models/cartSchema.js";
 
 const router = express.Router();
 
-// Add to cart
+// Add/Inc/Dec items in cart
 router.post("/:userId", async (req, res) => {
   // Destructure variables for ease of use
   const { product, qty } = req.body;
@@ -33,7 +33,22 @@ router.post("/:userId", async (req, res) => {
   res.json(cart);
 });
 
-// Remove from cart
+// Delete from cart
+router.delete("/:userId/:productId", async (req, res) => {
+  const { userId, productId } = req.params;
+
+  const cart = await Cart.findOneAndUpdate(
+    { user: userId },
+    {
+      $pull: { items: { product: productId } },
+    },
+  );
+
+  // If cart doesnt exist
+  if (!cart) return res.status(404).json({ error: "Cart not found" });
+
+  res.json(cart);
+});
 
 // Get Cart
 

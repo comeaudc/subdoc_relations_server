@@ -14,8 +14,7 @@ router.post("/:userId", async (req, res) => {
   let updateProduct = await Cart.findOneAndUpdate(
     // Filterable object, finduser, cart first. Then finding matching product
     { user: req.params.userId, "items.product": product },
-    { $inc: { "items.$.quantity": qty } },
-    { new: true },
+    { $inc: { "items.$.qty": qty } },
   );
 
   //if already existed and update cart. send back to frontend
@@ -29,7 +28,6 @@ router.post("/:userId", async (req, res) => {
         items: { product, qty },
       },
     },
-    {new: true, }
   );
 
   res.json(cart);

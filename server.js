@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import { logReq, globalErr } from "./middleware/middlewares.js";
 import connectDB from "./db/conn.js";
 import productRoutes from "./routes/productRoutes.js";
-import userRoutes from './routes/userRoutes.js';
+import userRoutes from "./routes/userRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 
 // Setups
 dotenv.config();
@@ -18,7 +19,8 @@ connectDB();
 
 // Routes
 app.use("/api/product", productRoutes);
-app.use("/api/user", userRoutes)
+app.use("/api/user", userRoutes);
+app.use("/api/cart", cartRoutes)
 
 // Global Err
 app.use(globalErr);

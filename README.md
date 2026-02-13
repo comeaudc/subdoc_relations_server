@@ -8,6 +8,6 @@
     - Create User & Cart
     - Read
 - Cart
-    - All items to cart
+    - Add items to cart
     - Remove Items From cart
     - Get Cart
